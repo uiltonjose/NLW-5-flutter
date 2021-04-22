@@ -6,22 +6,30 @@ class NextButtonWdiget extends StatelessWidget {
   final String label;
   final Color backgroundColor;
   final Color labelColor;
+  final Color borderColor;
+  final VoidCallback onTap;
 
   const NextButtonWdiget({
     required this.label,
     required this.backgroundColor,
     required this.labelColor,
+    required this.borderColor,
+    required this.onTap,
   });
 
-  NextButtonWdiget.green({required String label})
+  NextButtonWdiget.green({required String label, required VoidCallback onTap})
       : this.label = label,
         this.backgroundColor = AppColors.darkGreen,
-        labelColor = AppColors.white;
+        labelColor = AppColors.white,
+        this.borderColor = AppColors.darkGreen,
+        this.onTap = onTap;
 
-  NextButtonWdiget.white({required String label})
+  NextButtonWdiget.white({required String label, required VoidCallback onTap})
       : this.label = label,
         this.backgroundColor = AppColors.white,
-        labelColor = AppColors.grey;
+        labelColor = AppColors.grey,
+        this.borderColor = AppColors.grey,
+        this.onTap = onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +40,9 @@ class NextButtonWdiget extends StatelessWidget {
               backgroundColor: MaterialStateProperty.all(backgroundColor),
               shape: MaterialStateProperty.all(
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-              )),
-          onPressed: () {},
+              ),
+              side: MaterialStateProperty.all(BorderSide(color: borderColor))),
+          onPressed: onTap,
           child: Text(label,
               style: GoogleFonts.notoSans(
                 fontWeight: FontWeight.w600,
